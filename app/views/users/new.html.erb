@@ -1,0 +1,43 @@
+<h1>Users#new</h1>
+<p>Find me in app/views/users/new.html.erb</p>
+
+<%= form_for(@user) do |f| %>
+
+	<%= f.label :user_name, :id =>  "new_view_user_lookup_res" %>
+	<br>
+	<%= f.text_field :user_name, :id => "new_view_new_user" %>
+	
+  <br><br>
+
+	<%= f.label :email %>
+	<br>
+	<%= f.text_field :email%>
+	<br><br>
+
+	<%= f.label :password %>
+	
+(Display text?) 
+<input type="checkbox" id="new_view_password_checkbox">
+
+  <br>
+	<%= f.password_field :password, :id => "password", :class => "new_view_password" %>
+	<br>
+
+<br>
+
+confirm password:
+ <br>
+
+ <%= f.password_field :password_confirmation, 
+                      :id => "password_confirm", 
+                      :class => "new_view_password" %>
+ <br><br>
+<!-- 
+ <%= f.submit "Create my account", :id => "new_view_submit_button"%> -->
+
+  <p id="comparison-results">nothing to compare.</p>
+
+<% end %>
+
+
+

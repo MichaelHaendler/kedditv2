@@ -1,0 +1,80 @@
+
+<h1>Users#sign_up</h1>
+<p>Find me in app/views/users/sign_up.html.erb</p>
+
+
+
+
+<!-- <p>choose a user name: </p> -->
+
+<script src = "app/assets/javascripts/users_sign_up.js"> </script>
+
+
+<% content_for :lower_body do %>
+
+<%= form_for(@user) do |f| %>
+
+<!--new_view_user_lookup_res  -->
+  <%= f.label :user_name, :id =>  "sign_up_view_user_lookup_results" %>
+  <br>
+<!--   new_view_new_user -->
+  <%= f.text_field :user_name, :id => "sign_up_view_poss_new_user_name" %>
+  
+  <br>
+  <br>
+
+  <%= f.label :email %>
+  <br>
+  <%= f.text_field :email%>
+  <br>
+  <br>
+
+  <%= f.label :name %>
+  <br>
+  <%= f.text_field :name%>
+  <br>
+  <br>
+
+  <%= f.label :password %> 
+  
+  (Display text?) 
+
+<!-- new_view_password_checkbox -->
+  <input type="checkbox" id="signup_view_password_checkbox">
+
+  <br>
+    
+  <%= f.text_field :password, 
+                        :id => "password", 
+                        :class => "new_view_password" %>
+
+  <br>
+  <br>
+
+  confirm password:
+
+  <br>
+
+  <%= f.text_field :password_confirmation, 
+                      :id => "password_confirm", 
+                      :class => "new_view_password" %>
+  <br><br>
+
+<% end %>
+
+  <p id="comparison_results">nothing to compare.</p>
+
+<% end %>
+
+<!-- 
+
+some potentially interesting links about json:
+
+http://www.w3schools.com/json/json_http.asp
+http://www.w3schools.com/json/json_example.asp
+http://www.w3schools.com/json/json_files.asp 
+
+-->
+
+
+

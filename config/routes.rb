@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+
+
+  root 'users#front_page' 
+  get 'users/toy1'
+  get 'users/sign_in'
+  get 'users/sign_out'
+  get 'users/sign_up'
+  post 'users/sign_up_helper'
+  post 'users/sign_in_helper'
+  get 'zoomy', to: 'users#toy2'
+
+  resources 'users'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
