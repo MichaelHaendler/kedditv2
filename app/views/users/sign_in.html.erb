@@ -1,0 +1,38 @@
+<h1>Users#sign_in</h1>
+<p>Find me in app/views/users/sign_in.html.erb</p>
+ 
+<% content_for :lower_body do %>
+
+<%= form_for(:session, url: users_sign_in_helper_path) do |f| %>
+
+  <%= f.label :user_name %>
+  <br>
+  <%= f.text_field :user_name %>
+  <br>
+  <br>
+
+  <%= f.label :password  %>  (Hide text?) <input type="checkbox" id="sign_in_view_password_checkbox"/>
+  <br>
+  <%= f.text_field :password, :id => "password" %>
+  <br>
+  <br>
+
+<%= f.submit "Log in"%>
+  
+<br>
+<br>
+	<%= f.label :remember_me, class: "checkbox inline" do %>
+	    <%= f.check_box :remember_me %>
+	    <span>Remember me on this computer</span>
+
+	<% end %>
+
+  
+<% end %>
+
+  
+
+
+<p>New user? <%= link_to "Sign up now!", new_user_path %></p>
+
+<% end %>

@@ -1,0 +1,15 @@
+<h1>StaticPages#front_page</h1>
+<p>Find me in app/views/static_pages/front_page.html.erb</p>
+<br>
+
+
+<% if defined? @name %>
+  <p> hello <%= "#{@name}" %> we have been expecting you</p>
+<% else %>
+	<p>did not find it</p>
+<% end %>
+
+<%= link_to "sign in" , users_sign_in_path %>
+<br>
+<br>
+<%= link_to "sign up" , new_user_path %>

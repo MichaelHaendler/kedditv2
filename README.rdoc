@@ -1,28 +1,11 @@
-== README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+friday, jan 30th, 2015, 4:46pm:
 
-Things you may want to cover:
+this is a do over of kedditv1. Reason I am doing a do over is because I have
+a problem with my kedditv1, so rather than wait around and try to get help from
+others, I'm starting a new project with everything working, and continuing forward. 
+Everything is working, and hopefully my issue with the users class for my user model
+that I was having in kedditv1 will be avoided this time around. 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Also doing this over again because I wasn't backing my stuff up enough in kedditv1, and
+so there's a big gap between the latest backup and the one before it.
