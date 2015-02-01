@@ -11,16 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130212812) do
+ActiveRecord::Schema.define(version: 20150201042234) do
+
+  create_table "posts", force: true do |t|
+    t.text     "content"
+    t.integer  "User_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "posts", ["User_id"], name: "index_posts_on_User_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "password"
     t.string   "user_name"
     t.string   "password_confirmation"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "email"
+    t.boolean  "admin",                 default: false
   end
 
 end

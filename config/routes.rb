@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'posts/new'
+
   root 'users#front_page' 
   get 'users/toy1'
   get 'users/sign_in'
