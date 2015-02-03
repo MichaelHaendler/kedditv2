@@ -1,15 +1,14 @@
 
- 
+
 $(document).ready(function(){
 
 	var user_name_okay = null; //true if okay, false if not okay, null if empty. 
 	var passwords_match = null; //true if match, false no match, null if both are empty. 
 
+  do_in_case_of_page_reload();
+
   //checkbox on whether or not to show the passwords entered
   $("#signup_view_password_checkbox").click(function(){
-  	// console.log("got here");
-  	// console.log(document.getElementById("signup_view_password_checkbox"));
-  	//password and pasword confirm ar the ids of the password fields.
     hideFields(this,"password","password_confirm");
   });
 
@@ -26,79 +25,65 @@ $(document).ready(function(){
   $(".new_view_password").keyup(function(){
     //console.log('here');
     passwords_match = run_password_check_code("comparison_results","password","password_confirm");
-
     finalCheck(user_name_okay,passwords_match);
   });
 
 });
 
 function finalCheck(user_name_okay,passwords_match){
+	// console.log("now in password finalCheck");
 
-	// console.log("user_name_okay is: " + user_name_okay);
-
-	// console.log("passwords_match is: " + passwords_match);
-
+	//if the user name is okay and the passwords are okay, show button and hide text. 
 	if(user_name_okay && passwords_match){
-	    
-	    var marq = document.getElementById("comparison_results");
-	    // console.log("marq is: " + marq.innerHTML);
-	    var button = document.createElement('button');
-	    button.innerHTML = "create account";
-	    button.id = "comparison_results";
-	    marq.parentNode.appendChild(button);
-	    marq.parentNode.removeChild(marq);	
-	 // console.log("button type is: " + document.getElementById("comparison_results").tagName);
-
-
+		// console.log("everything okay ");
+		show_button_hide_text();
 	}
-
-}
-
-//passC == password confirmation
-function run_password_check_code(place_results_at,pass,passC){
-
-    return signup_view_password_confirmation_print(place_results_at,pass,passC);
-
-}
-
-//res == results
-//pUserName == (possible) user name
-function run_user_name_code(res,pUserNameID){
-
-	var pUserName = document.getElementById(pUserNameID).value;
-
-	//console.log("return is: " + meets_requirements(pUserNameID));
-
-	if(pUserName != ""){
-
-		if(meets_requirements(pUserName)){
-
-			if(user_name_not_taken(pUserName)){
-				document.getElementById(res).innerHTML = "(avaiable!)";	
-				return true; //user name okay and, not taken.
-			}
-			else{
-				document.getElementById(res).innerHTML = "(Taken) Please choose something else.";
-			}
-		}
-		else{
-			document.getElementById(res).innerHTML = "please include a number in your user name.";
-			return false; //user name NOT okay, doesn't meet requirements.
-		}
-
-	}
-	//if it IS a blank string
+	//otherwise, hide button and show text (that was last put there). 
 	else{
-		document.getElementById(res).innerHTML = "User name";
+		// console.log("everything NOT okay ");
+		var sb = document.getElementById("submit_button");
+		sb.hidden = true;
+
+		//show text.
+		var cr = document.getElementById("comparison_results");
+		cr.style = "display";
+
 	}
-
-
-
-	//showButtonCheck(user_name_not_taken);
 
 }
 
-//f1 == field1, f2 == field2
+function show_button_hide_text(){
+
+	//show button
+	var sb = document.getElementById("submit_button");
+	sb.hidden = false;
+
+
+	//hide text	
+	var cr = document.getElementById("comparison_results");
+	//console.log("finished here");
+	cr.innerHTML = "";
+	//cr.style = "display:none";
+	// cr.style = "hidden";
+	// console.log("cr is:");
+	// console.log(cr);
+
+
+}
+
+function hide_button_show_text(text_to_show){
+
+	//hide button
+	var sb = document.getElementById("submit_button");
+	sb.hidden = true;
+
+	//show text.
+	var cr = document.getElementById("comparison_results");
+	cr.style = "display";
+	cr.innerHTML = text_to_show;
+
+}
+
 function hideFields(checkBox,f1,f2){
 
   if(checkBox.checked == true){
@@ -113,29 +98,6 @@ function hideFields(checkBox,f1,f2){
   }
 
 }
-
-
-//user_name_meets_syntax_requirements
-// run_last_checks
-//res ==id of where to output results to
-//NOT being used. 
-// function run_last_checks(res,id){
-
-//   //console.log("got into check_if_user_name_already_exists");
-
-//   var poss_user_name = document.getElementById(id).value;
-
-//   //if it meets the requirements and say whether or not the user name is taken.
-//   //otherwise, we display nothing.
-//   if(meets_requirements(poss_user_name)){
-
-//   		document.getElementById(res).innerHTML = "(avaiable!)";
-//   }
-//   else{
-//     document.getElementById(res).innerHTML = "User name";
-//   }
-// }
-
 
 function user_name_not_taken(poss_user_name){
   
@@ -162,10 +124,12 @@ function user_name_not_taken(poss_user_name){
 
 //new_view_password_confirmation_print
 //comp_res == comparison results
+//says (directly in the html page itself) whether or not the passwords
+//entered meet the required standards.  
 function signup_view_password_confirmation_print(comp_res,s1,s2){
 
 
-	// console.log("(signup_view_password_confirmation_print)");
+	//console.log("(signup_view_password_confirmation_print)");
 
 	// console.log("s1 is: " + document.getElementById(s1).tagName);
 
@@ -174,50 +138,37 @@ function signup_view_password_confirmation_print(comp_res,s1,s2){
 	var pass = document.getElementById(s1).value;
 	var passC = document.getElementById(s2).value;
 
-	// document.writeln("pass2 is: \"" + pass2 + "\"" + "\n");
-
-	// document.write("pass3 is: \"" + pass3 + "\"");
-
 	if(pass != "" && passC != ""){
 
+	 //if the strings equal each other, then...
 	  if(pass == passC){
 
-	    if(is_not_a_button(comp_res)){
-		    document.getElementById(comp_res).innerHTML = "match!";
+ 		//if the html element is not hidden (meaning that we haven't gotten
+ 		//to the point of hiding it and showing it as a button...then set it to
+ 		//say 'match'
+	    if(is_not_hidden(comp_res)){
+		    document.getElementById(comp_res).innerHTML = "match!1";
 		    return true;
 	    }
+	    //if it IS hidden, then...hide the button, and show it. 
 	    else{
-		    var marq = document.getElementById("comparison_results");
-		    // console.log("marq is: " + marq.innerHTML);
-		    var text_input = document.createElement('p');
-		    text_input.innerHTML = "match!";
-		    text_input.id = "comparison_results";
-		    marq.parentNode.appendChild(text_input);
-		    marq.parentNode.removeChild(marq);
-
+	    	hide_button_show_text("match!2");
 		    return true;
-
 	    }
 
 	  }
+	  //if the strings don't match each other...
 	  else{
-	    // //document.write("NO match!");
-	    // document.getElementById(comp_res).innerHTML = "NO match!";
-	    // return false;
 
-	    if(is_not_a_button(comp_res)){
+	  	//if text area is not hidden...then just set it normally. 
+	    if(is_not_hidden(comp_res)){
 		    document.getElementById(comp_res).innerHTML = "NO match!";
 		    return false;
 	    }
+	    //if text area IS hidden (meaning input had been said to be okay previous, but
+	    //no longer is)...hide the button and show the text. 
 	    else{
-		    var marq = document.getElementById("comparison_results");
-		    // console.log("marq is: " + marq.innerHTML);
-		    var text_input = document.createElement('p');
-		    text_input.innerHTML = "NO match!";
-		    text_input.id = "comparison_results";
-		    marq.parentNode.appendChild(text_input);
-		    marq.parentNode.removeChild(marq);
-
+	    	hide_button_show_text("match!3");
 		    return false;
 
 	    }	    
@@ -229,57 +180,23 @@ function signup_view_password_confirmation_print(comp_res,s1,s2){
 
 	}
 	else{
-	    var marq = document.getElementById("comparison_results");
-	    // console.log("marq is: " + marq.innerHTML);
-	    var text_input = document.createElement('p');
-	    text_input.innerHTML = "nothing to compare.";
-	    text_input.id = "comparison_results";
-	    marq.parentNode.appendChild(text_input);
-	    marq.parentNode.removeChild(marq);
-	  //document.write("nothing to compare.");
-	  //document.getElementById(comp_res).innerHTML = ;
+		convert_button_to_nothing_to_compare_text();
 	  return null;
 	}
 
 }
 
-function is_not_a_button(id){
 
-	// console.log("id is: " + id);
+function is_not_hidden(id){
 
-	// console.log("comparison_results is: " + document.getElementById("comparison_results").tagName);
+	console.log(document.getElementById(id));
 
-	return document.getElementById(id).tagName != "BUTTON";
-
+	return document.getElementById(id).style.visibility != 'hidden';
 }
-
 
 function meets_requirements(poss_user_name){
 
   var minLength = 4; //minimum user name length
-
-  //var s1 = 
-
-  //console.log(poss_user_name.length >= minLength ? "poss_user_name.length >= minLength is: true" : "poss_user_name.length >= minLength is: false");
-
-  //console.(/[0-9]/.test("ab3c"));
-
- //  poss_user_name = "abcd";
-
-// console.log("poss_user_name is: " + poss_user_name);
-//  var zoom1 = poss_user_name.match(/[0-9]/);
-//  console.log("zoom1 is: " + zoom1);
-	//debugger
-
- //  var blah = 1 + parseInt(poss_user_name.match(/[0-9]/));
-
- //  console.log("555result is: " + blah);
-
- //  console.log("6result is: " + poss_user_name.match(/[0-9]/).isNaN());
-
-
-
-  //console.log(poss_user_name.match(/[0-9]/) ? "poss_user_name.match(/[0-9]/) is: true"  : "poss_user_name.match(/[0-9]/) is: false"); 
 
   if(poss_user_name.length >= minLength &&
     poss_user_name.match(/[0-9]/)){
@@ -289,4 +206,70 @@ function meets_requirements(poss_user_name){
   else{
     return false;
   }
+}
+
+//passC == password confirmation
+function run_password_check_code(place_results_at,pass,passC){
+
+    return signup_view_password_confirmation_print(place_results_at,pass,passC);
+
+}
+
+//res == results
+//pUserName == (possible) user name
+function run_user_name_code(res,pUserNameID){
+
+	var pUserName = document.getElementById(pUserNameID).value;
+
+	//console.log("return is: " + meets_requirements(pUserNameID));
+
+	//if it's not a blank string
+	if(pUserName != ""){
+
+		//and it meets the requirements
+		if(meets_requirements(pUserName)){
+
+			//and it isn't taken
+			if(user_name_not_taken(pUserName)){
+				document.getElementById(res).innerHTML = "(avaiable!)";	
+				return true; //user name okay and, not taken.
+			}
+			//if it IS taken
+			else{
+				document.getElementById(res).innerHTML = "(Taken) Please choose something else.";
+			}
+		}
+		//if it doesn't meet requirements...
+		else{
+			document.getElementById(res).innerHTML = "please include a number in your user name.";
+			return false; //user name NOT okay, doesn't meet requirements.
+		}
+
+	}
+	//if it IS a blank string
+	else{
+		document.getElementById(res).innerHTML = "User name";
+	}
+
+}
+
+function meets_requirements(poss_user_name){
+
+  var minLength = 4; //minimum user name length
+
+  if(poss_user_name.length >= minLength &&
+    poss_user_name.match(/[0-9]/)){
+    //console.log("(meets_requirements) returned true");
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+//test if user name is okay ()
+function do_in_case_of_page_reload(){
+
+	
+
 }

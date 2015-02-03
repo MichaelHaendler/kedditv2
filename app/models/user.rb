@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
 	has_many :post, dependent: :destroy
 
 	def test
-		"testing testing222"
+		#rand.to_s[0..3]
+		rand[0..3]
 	end
 
 	#a work around until I am able to get it to work proper, and do stuff like

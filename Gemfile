@@ -45,3 +45,5 @@ end
 
 #http://stackoverflow.com/questions/27139007/cant-migrate-database-after-scaffold-section-2-2-ruby-on-rails-tutorial-michae
 gem 'arel', '6.0.0.beta2'
+
+gem 'faker', '1.4.3'

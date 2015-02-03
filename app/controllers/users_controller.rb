@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     #@bonky = "suzy"
 
-    p "2 session[:blu] NOW is: #{session[:blu]}"
+    #p "2 session[:blu] NOW is: #{session[:blu]}"
 
     # @temp = self.name
 
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
   def sign_up_helper
 
-    logger.debug "start of sign up helper--------------------------------------"
+    #logger.debug "start of sign up helper--------------------------------------"
     # p "params[:data] is: #{params[:data]}"
 
     #  #Client.where("first_name LIKE '%#{params[:first_name]}%'")
@@ -54,13 +54,13 @@ class UsersController < ApplicationController
 
     #@booleanVal = @val.length > 1
 
-    p "params[:data] is: #{params[:data]}"
+    #p "params[:data] is: #{params[:data]}"
 
-    p User.where("user_name LIKE '%#{params[:data]}%'")
+    #p User.where("user_name LIKE '%#{params[:data]}%'")
 
     @booleanVal = User.where("user_name LIKE '%#{params[:data]}%'").exists?
 
-    p "booleanVal is: #{@booleanVal}"
+    #p "booleanVal is: #{@booleanVal}"
 
     respond_to do |format|
       format.html
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     end
 
 
-    logger.debug "END of sign up helper----------------------------------------"
+    #logger.debug "END of sign up helper----------------------------------------"
 
   end
 
@@ -129,8 +129,8 @@ class UsersController < ApplicationController
       @new_user = User.new(user_params)
       # p "new_user is: #{@new_user.inspect}"
       @new_user.save
-   # else
-   #  p "not making a new user"
+   else
+    p "not making a new user"
    end
 
    # if params[:user] != nil && params[:user][:name] != nil
