@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  include SessionsHelper
+
 
   def front_page
 
@@ -129,6 +131,9 @@ class UsersController < ApplicationController
       @new_user = User.new(user_params)
       # p "new_user is: #{@new_user.inspect}"
       @new_user.save
+      session[:user_name] = params[:user][:user_name]
+      redirect_to root_url
+
    else
     p "not making a new user"
    end
@@ -200,7 +205,7 @@ class UsersController < ApplicationController
 
     #p "temp should now read #{self.name}"
 
-    @returned_true = successfully_signed_in
+    @returned_true = successfully_signed_in()
 
     #p "@returned_true is: #{@returned_true}"
 

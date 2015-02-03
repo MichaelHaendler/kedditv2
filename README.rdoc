@@ -9,3 +9,38 @@ that I was having in kedditv1 will be avoided this time around.
 
 Also doing this over again because I wasn't backing my stuff up enough in kedditv1, and
 so there's a big gap between the latest backup and the one before it.
+
+
+Monday Feb 2nd, 2015, 8:09pm 
+
+
+NOT done: 
+
+-so you hit the "create my account button"...this takes you to the create page. Page doesn't know what
+to do, has filled in forms, but doesn't say anything. if you hit "back",I dunno. I guess I should somehow
+set it up so that if you go back, that those fields are then cleared.
+
+note: Skipping basic requirements (such as length) for passwords.The field itself will only take about 20
+or 30 characters, 
+
+done: 
+
+sign up form otherwise basically works. 
+
+nothing too special sadly. 
+
+-will tell you if user name entered meets the requirements. 
+
+-will tell you if passwords match up. 
+
+-won't let you submit if passwords don't match up up, or if user name is already taken (or doesn't
+meet the requirements)
+
+-password meter (to say how strong password is) 
+
+slight change of topic: 
+
+when you sign in, you get redirected to the front page, and a personalized greeting shows up. 
+
+also, when a person signs up for the first time, they are automtically logged in, send to the front
+page, and given said personalized greeting. 

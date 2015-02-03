@@ -1,18 +1,30 @@
 Rails.application.routes.draw do
 
 
-  get 'posts/new'
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  # get 'posts/new'
 
   root 'users#front_page' 
-  get 'users/toy1'
+  # get 'users/toy1'
   get 'users/sign_in'
   get 'users/sign_out'
   get 'users/sign_up'
   post 'users/sign_up_helper'
   post 'users/sign_in_helper'
-  get 'zoomy', to: 'users#toy2'
+  # get 'zoomy', to: 'users#toy2'
 
-  resources 'users'
+  # get    'login'   => 'sessions#new'
+  # post   'login'   => 'sessions#create'
+  # delete 'logout'  => 'sessions#destroy'
+
+  #resources 'users'
+  resources 'users', only: [:new,:create]
+  #resources :account_activations, only: [:edit] #example only
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,7 +1,12 @@
 <h1>Users#front_page</h1>
 <p>Find me in app/views/users/front_page.html.erb</p>
 
-<% content_for :lower_body do %>
+<% if session[:user_name] %>
+	<p id = "user_greeting_signed_in"> hi <%= session[:user_name] %> !</p>
+<% else %>
+	<p id = "user_greeting_not_signed_in"> hello non signed in user! </p>
+<% end %>
+
 
 <%= link_to "sign in" , users_sign_in_path %>
 <br>
@@ -10,11 +15,6 @@
 <br>
 <br>
 <%= link_to "sign up" , users_sign_up_path %>
-<!--<%= link_to "sign up" , new_user_path %>-->
-
-
-  
-<% end %>
 
 
 

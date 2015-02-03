@@ -138,6 +138,7 @@ function signup_view_password_confirmation_print(comp_res,s1,s2){
 	var pass = document.getElementById(s1).value;
 	var passC = document.getElementById(s2).value;
 
+	//if the strings are not blank
 	if(pass != "" && passC != ""){
 
 	 //if the strings equal each other, then...
@@ -147,12 +148,12 @@ function signup_view_password_confirmation_print(comp_res,s1,s2){
  		//to the point of hiding it and showing it as a button...then set it to
  		//say 'match'
 	    if(is_not_hidden(comp_res)){
-		    document.getElementById(comp_res).innerHTML = "match!1";
+		    document.getElementById(comp_res).innerHTML = "match!";
 		    return true;
 	    }
 	    //if it IS hidden, then...hide the button, and show it. 
 	    else{
-	    	hide_button_show_text("match!2");
+	    	hide_button_show_text("match!");
 		    return true;
 	    }
 
@@ -168,7 +169,7 @@ function signup_view_password_confirmation_print(comp_res,s1,s2){
 	    //if text area IS hidden (meaning input had been said to be okay previous, but
 	    //no longer is)...hide the button and show the text. 
 	    else{
-	    	hide_button_show_text("match!3");
+	    	hide_button_show_text("match!");
 		    return false;
 
 	    }	    
@@ -179,17 +180,22 @@ function signup_view_password_confirmation_print(comp_res,s1,s2){
 
 
 	}
+	//the strings ARE blank
 	else{
-		convert_button_to_nothing_to_compare_text();
+		convert_button_to_nothing_to_compare_text(comp_res);
 	  return null;
 	}
 
 }
 
+function convert_button_to_nothing_to_compare_text(comp_res){
+	document.getElementById(comp_res).innerHTML = "nothing to compare.";
+}
+
 
 function is_not_hidden(id){
 
-	console.log(document.getElementById(id));
+	//console.log(document.getElementById(id));
 
 	return document.getElementById(id).style.visibility != 'hidden';
 }
@@ -200,6 +206,22 @@ function meets_requirements(poss_user_name){
 
   if(poss_user_name.length >= minLength &&
     poss_user_name.match(/[0-9]/)){
+    //console.log("(meets_requirements) returned true");
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function pass_meets_requirements(poss_pass){
+
+  var minLength = 1; //minimum user name length
+  var maxLength = 20;
+
+  if(poss_pass != "" &&
+  	poss_user_name.length >= minLength && 
+  	poss_user_name.length <= maxLength){
     //console.log("(meets_requirements) returned true");
     return true;
   }

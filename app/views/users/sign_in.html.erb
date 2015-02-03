@@ -1,7 +1,6 @@
 <h1>Users#sign_in</h1>
 <p>Find me in app/views/users/sign_in.html.erb</p>
  
-<% content_for :lower_body do %>
 
 <%= form_for(:session, url: users_sign_in_helper_path) do |f| %>
 
@@ -34,5 +33,3 @@
 
 
 <p>New user? <%= link_to "Sign up now!", new_user_path %></p>
-
-<% end %>

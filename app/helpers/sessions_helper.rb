@@ -1,4 +1,6 @@
-module UsersHelper
+
+
+module SessionsHelper
 
 
   def clear_session
@@ -33,5 +35,5 @@ module UsersHelper
   	logger.debug "END of successfully_signed_in--------------------------------------"
   end
 
-	
+
 end
