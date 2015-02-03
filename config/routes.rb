@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'users/sign_up'
   post 'users/sign_up_helper'
   post 'users/sign_in_helper'
+  get 'users/testing_page'
+  post 'users/testing_page_helper'
+  
   # get 'zoomy', to: 'users#toy2'
 
   # get    'login'   => 'sessions#new'

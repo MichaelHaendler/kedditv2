@@ -2,7 +2,7 @@
 <p>Find me in app/views/users/front_page.html.erb</p>
 
 <% if session[:user_name] %>
-	<p id = "user_greeting_signed_in"> hi <%= session[:user_name] %> !</p>
+	<p id = "user_greeting_signed_in"> hi <%= session[:user_name] %>!</p>
 <% else %>
 	<p id = "user_greeting_not_signed_in"> hello non signed in user! </p>
 <% end %>
@@ -15,6 +15,14 @@
 <br>
 <br>
 <%= link_to "sign up" , users_sign_up_path %>
+<br>
+<br>
+
+<% if session[:user_name] %>
+	<p id = "testing_page_id"><%= link_to "testing page" , users_testing_page_path %></p>
+<% end %>
+
+
 
 
 

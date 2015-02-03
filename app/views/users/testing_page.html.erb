@@ -1,0 +1,76 @@
+<h1>Users#testing_page</h1>
+<p>Find me in app/views/users/testing_page.html.erb</p>
+
+<% if session[:user_name] %>
+	<p id = "user_greeting_signed_in"> hi <%= session[:user_name] %>!</p>
+<% else %>
+	<p id = "user_greeting_not_signed_in"> hello non signed in user! </p>
+<% end %>
+
+<!--
+
+<% @posts.each do |post| %>
+  <p><%= post.content %></p>
+<% end %>
+
+<p>-----------------------------</p>
+
+-->
+
+<%until @moreRecent < @oldest  do %>
+   <%= @posts[@moreRecent].content %>
+  <% @moreRecent -= 1 %>
+  <br>
+<% end %>
+<br>
+
+
+<textarea rows="6" cols="35" id = "testing_page_text_box">
+</textarea>
+<br>
+<input name="commit" type="submit" value="submit post" id="submit_post_button" />
+
+
+<script>
+
+$(document).ready(function(){
+
+	console.log("ready!!!");
+
+	$("#submit_post_button").click(function(){
+		var post = document.getElementById("testing_page_text_box");
+		console.log(post);
+		post_submission(post.value);
+		//post.innerHtml = "";
+	 });
+});
+
+
+function post_submission(submission){
+  
+  console.log("got into ajax_code_boolean_version");
+
+  // var params = { data: submission };  
+  var params = { id: 3 , content: submission }; 
+  var ret_val = true; //return value. default value is true (meaning that the user name is taken)
+
+  $.ajax({
+      type: "POST",
+      url: "/users/testing_page_helper/?format=json",
+      data: params,
+      dataType: "json",
+      traditional: true,
+      async: false,
+      success: function(data){
+      	console.log("got here at least");
+        ret_val = true;
+      }
+
+  });
+
+  return ret_val;
+
+}
+
+
+</script>

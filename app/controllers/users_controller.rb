@@ -2,25 +2,52 @@ class UsersController < ApplicationController
 
   include SessionsHelper
 
+#User.find_by(id: 3).getPosts()[0].content
+
+	def newPost(id,post_text)
+
+		p "id is: #{id}"
+		p "post_text is: #{post_text}"
+
+		Post.new(User_id: id, content: post_text).save
+	end
+
+  def testing_page
+
+  	p "got into testing_page-----------------------"
+
+  	@posts = User.find(session[:id]).getPosts()
+
+  	@moreRecent = @posts.length - 1
+
+  	@oldest = 0
+
+    #cookies.permanent[:wowza2] = "this is a just a test. nothing more. 123456";
+  end
+
+  #submit post to table. 
+  def testing_page_helper
+  	p "getting into testing_page_helper action at least!@!@!@!@!@!"
+
+  	p "params[:id] is: #{params[:id]}"
+  	p "params[:content] is: #{params[:content]}"
+
+  	p params[:data]
+  	self.newPost(params[:id],params[:content])
+
+    respond_to do |format|
+      format.html
+
+      format.json { render :json => { :status => 'Ok', :message => 'Received', exists: true},
+                    :status => 200
+                  }
+    end
+
+
+  end
+
 
   def front_page
-
-
-
-
-    # p session[:blu].nil? ? "2 session[:blu] was nil" : "2 session[:blu] was: #{session[:blu]}"
-
-    # if(session[:blu].nil?)
-    #   session[:blu] = "jake"
-    # end
-
-    #@bonky = "suzy"
-
-    #p "2 session[:blu] NOW is: #{session[:blu]}"
-
-    # @temp = self.name
-
-    # p "111111temp is: #{@temp}"
 
   end
 
@@ -42,8 +69,8 @@ class UsersController < ApplicationController
 
   def sign_up_helper
 
-    #logger.debug "start of sign up helper--------------------------------------"
-    # p "params[:data] is: #{params[:data]}"
+    logger.debug "start of sign up helper--------------------------------------"
+     p "params[:data] is: #{params[:data]}"
 
     #  #Client.where("first_name LIKE '%#{params[:first_name]}%'")
     # @val = User.where("user_name LIKE '%#{params[:data]}%'")
@@ -62,7 +89,7 @@ class UsersController < ApplicationController
 
     @booleanVal = User.where("user_name LIKE '%#{params[:data]}%'").exists?
 
-    #p "booleanVal is: #{@booleanVal}"
+    p "booleanVal is: #{@booleanVal}"
 
     respond_to do |format|
       format.html
@@ -100,6 +127,8 @@ class UsersController < ApplicationController
 
     #cookies.permanent[:wowza2] = "this is a just a test. nothing more. 123456";
   end
+
+
 
 
   def sign_out
