@@ -44,3 +44,11 @@ when you sign in, you get redirected to the front page, and a personalized greet
 
 also, when a person signs up for the first time, they are automtically logged in, send to the front
 page, and given said personalized greeting. 
+
+Tuesday Feb 3rd 2015, 3:24 AM
+
+basically have submitting comments working. user can submit. :-)
+
+Now I just need to figure out how to take the id from the user objects, and use that to set
+the params[:id] field. as of now I'm manually setting that field. 
+the user object set 
