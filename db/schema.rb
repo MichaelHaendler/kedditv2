@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201042234) do
+ActiveRecord::Schema.define(version: 20150213062847) do
 
   create_table "posts", force: true do |t|
     t.text     "content"
     t.integer  "User_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "post_id_rel_to_user", default: 0
   end
 
   add_index "posts", ["User_id"], name: "index_posts_on_User_id"

@@ -16,8 +16,9 @@ module UsersHelper
   end
 
   def successfully_signed_in
-  	logger.debug "start of successfully_signed_in--------------------------------------"
+  	logger.debug "start of successfully_signed_in111--------------------------------------"
 
+    p "POW POW WOW WOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
   	
   	@user = User.find_by(user_name: params[:session][:user_name])
 
@@ -30,7 +31,7 @@ module UsersHelper
   		return false
   	end
   	
-  	logger.debug "END of successfully_signed_in--------------------------------------"
+  	logger.debug "END of successfully_signed_in111--------------------------------------"
   end
 
 	

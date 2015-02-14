@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   post 'users/sign_in_helper'
   get 'users/testing_page'
   post 'users/testing_page_helper'
+  get 'users/testing_page_helper2'
+  post 'users/delete_post_helper'
+  post 'users/submit_post_helper'
+  post 'users/save_changes_to_comment_helper'
   
   # get 'zoomy', to: 'users#toy2'
 

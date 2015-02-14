@@ -4,13 +4,137 @@ class UsersController < ApplicationController
 
 #User.find_by(id: 3).getPosts()[0].content
 
-	def newPost(id,post_text)
+  #take comment, look up user, look up post, and change the post. 
+  def save_changes_to_comment_helper
 
-		p "id is: #{id}"
-		p "post_text is: #{post_text}"
+    p "getting into save_changes_to_comment_helper"
 
-		Post.new(User_id: id, content: post_text).save
+    p "params[:new_post] is: #{params[:new_post]}"
+
+    p "params[:post_id_num] is: #{params[:post_id_num]}"
+
+    p "session[:id] is: #{session[:id]}"
+
+    #@temp = User.find(session[:id]).getPosts()
+
+    #debugger
+
+    p "User.find(session[:id]).getPosts() is: #{User.find(session[:id]).getPosts().inspect}"
+
+    #get post that we're looking for
+    @post = User.find(session[:id]).getPosts().find_by(post_id_rel_to_user: params[:post_id_num])
+
+    p "@post is: #{@post.inspect}"
+
+    #debugger
+
+    #update content
+    @post.content = params[:new_post]
+
+    #save changes to it. 
+    @post.save
+
+    respond_to do |format|
+      format.html
+
+      format.json { render :json => { :status => 'Ok', :message => 'Received'},:status => 200}
+                  
+    end
+
+  end
+
+	def newPost(post_text)
+		#p "post_text is: #{post_text}"
+
+    # p "ZONKERS!!!!!!!!!!!!!!!!!!!!!!!222222222222222"
+    # # p self.post
+    # p "self.id is: #{id}"
+    # Post.blah(self)
+    #Post.zoom3()
+		#Post.new(User_id: session[:id], content: post_text).save
+    Post.newPost(session[:id],post_text)
 	end
+
+	def getPosts()
+		Post.where(User_id: session[:id])
+	end
+
+  def delete_post_helper()
+
+    @user = current_user()
+
+    @user.delPost(params[:post_id])
+
+    #@posts = self.getPosts()
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => { :status => 'Ok', :message => 'Received'}, :status => 200}
+      #format.json { render :json => { :status => 'Ok', :message => 'Received', posts: @posts}, :status => 200}
+    end
+
+  end
+
+  #submit post to table. 
+  def submit_post_helper
+    # p "getting into testing_page_helper action at least!@!@!@!@!@!"
+
+    # p "session[:id] is: #{session[:id]}"
+    # p "params[:content] is: #{params[:content]}"
+
+    @results = self.newPost(params[:content])
+
+    @posts = self.getPosts()
+
+    #p "@results is: #{@results}"
+
+    respond_to do |format|
+      format.html
+
+      format.json { render :json => { :status => 'Ok', :message => 'Received', posts: @posts, post_was_succesfully_submitted: @results},
+                    :status => 200
+                  }
+    end
+
+
+  end
+
+  # #submit post to table. 
+  # def testing_page_helper
+  # 	# p "getting into testing_page_helper action at least!@!@!@!@!@!"
+
+  # 	# p "session[:id] is: #{session[:id]}"
+  # 	# p "params[:content] is: #{params[:content]}"
+
+  # 	@results = self.newPost(params[:content])
+
+  # 	p "@results is: #{@results}"
+
+  #   respond_to do |format|
+  #     format.html
+
+  #     format.json { render :json => { :status => 'Ok', :message => 'Received', post_was_succesfully_submitted: @results},
+  #                   :status => 200
+  #                 }
+  #   end
+
+
+  # end
+
+  def testing_page_helper2 
+  	p "got into the testing_page_helper2 action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+  	@posts = self.getPosts()
+
+    respond_to do |format|
+      format.html
+
+      format.json { render :json => { :status => 'Ok', :message => 'Received', posts: @posts},
+                    :status => 200
+                  }
+    end
+
+  end
 
   def testing_page
 
@@ -23,27 +147,6 @@ class UsersController < ApplicationController
   	@oldest = 0
 
     #cookies.permanent[:wowza2] = "this is a just a test. nothing more. 123456";
-  end
-
-  #submit post to table. 
-  def testing_page_helper
-  	p "getting into testing_page_helper action at least!@!@!@!@!@!"
-
-  	p "params[:id] is: #{params[:id]}"
-  	p "params[:content] is: #{params[:content]}"
-
-  	p params[:data]
-  	self.newPost(params[:id],params[:content])
-
-    respond_to do |format|
-      format.html
-
-      format.json { render :json => { :status => 'Ok', :message => 'Received', exists: true},
-                    :status => 200
-                  }
-    end
-
-
   end
 
 
@@ -230,7 +333,7 @@ class UsersController < ApplicationController
 
     # p "1 @bonky now is: #{@bonky}"
 
-    logger.debug "start of sign IN--------------------------------------"
+    logger.debug "start of sign IN helper--------------------------------------"
 
     #p "temp should now read #{self.name}"
 
@@ -247,15 +350,29 @@ class UsersController < ApplicationController
       redirect_to new_user_url
     end
 
-    logger.debug "end of sign IN--------------------------------------"
+    logger.debug "end of sign IN helper--------------------------------------"
 
   end
 
 private #---------------------------------------------------------
 
   def user_params
-    params.require(:user).permit(:user_name, :email, :password,
+
+    # p "entering user_params ------------"
+
+    @temp = params.require(:user).permit(:user_name, :email, :password,
                                  :password_confirm)
+
+    # p "@temp was: #{@temp}"
+
+    @temp[:user_name] = @temp[:user_name].downcase
+
+    # p "@temp[:user_name].downcase outputs: #{@temp[:user_name].downcase}"
+
+    # p "@temp now is: #{@temp}"
+
+    # p "right before user_params return------------"
+    return @temp
   end
 
   def password_acceptable

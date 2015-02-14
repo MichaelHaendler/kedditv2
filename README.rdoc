@@ -42,13 +42,34 @@ slight change of topic:
 
 when you sign in, you get redirected to the front page, and a personalized greeting shows up. 
 
-also, when a person signs up for the first time, they are automtically logged in, send to the front
+when a person signs up for the first time, they are automtically logged in, send to the front
 page, and given said personalized greeting. 
 
 Tuesday Feb 3rd 2015, 3:24 AM
 
-basically have submitting comments working. user can submit. :-)
+basically have submitting comments working. user can submit, and see a history of their comments). :-)
 
-Now I just need to figure out how to take the id from the user objects, and use that to set
-the params[:id] field. as of now I'm manually setting that field. 
-the user object set 
+Sunday, February 8th, 6:34pm
+
+users can now sign up with something like Mike1, but then sign in with something like
+mike1. Or mIKE1. That is to say, case doesn't matter. 
+
+Monday, February 9th 3:48am 
+
+can submit posts, and have them pop up immediately on the page (via ajax)
+
+can delete posts (via a delete button) and have them immediately removed (again, ajax) 
+
+Friday February 13th 10:19pm 
+
+on a page called testing_page (a page that you get a link to on the front page only if you're signed in)
+a signed in user can see all of their posts, submit a post, delete a post, edit a post, and cancel changes
+to a post. These are all of the basic features that a user needs to participate in a forum. 
+
+All changes done, are, via ajax, done on both user side AND server side. Any changes are done dynamically/instantaniously,
+and so up immediately on the page that the user is performing the changes on. 
+
+
+
+
+
