@@ -224,6 +224,7 @@ class UsersController < ApplicationController
     # logger.debug "end of sign up----------------------------------------"
 
     @user = User.new
+    p "@user is of type #{@user.class}" #"@user is of type User" "@forum is of type: Forum"
   end
 
   def sign_in
@@ -302,6 +303,7 @@ class UsersController < ApplicationController
    # logger.debug params[:data]
    # logger.debug "end of new--------------------------------------"
    @user = User.new
+   p "@user is of type: #{@user.class}"
   end
 
   def edit

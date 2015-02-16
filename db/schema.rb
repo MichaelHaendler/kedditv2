@@ -11,17 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213062847) do
+ActiveRecord::Schema.define(version: 20150216015532) do
+
+  create_table "forums", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.text     "description"
+    t.integer  "unique_num"
+    t.string   "name_of_assoc_subkeddit"
+    t.string   "submitted_by"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "posts", force: true do |t|
     t.text     "content"
     t.integer  "User_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "post_id_rel_to_user", default: 0
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "post_id_rel_to_user",           default: 0
+    t.string   "inReplyTo_user_name"
+    t.integer  "inReplyTo_post_id_rel_to_user"
+    t.integer  "upvote"
+    t.integer  "downvote"
   end
 
   add_index "posts", ["User_id"], name: "index_posts_on_User_id"
+
+  create_table "sub_keddits", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

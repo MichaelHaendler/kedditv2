@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  url: MyString
+  description: MyText
+  unique_num: 1
+  name_of_assoc_subkeddit: MyString
+  submitted_by: MyString
+
+two:
+  title: MyString
+  url: MyString
+  description: MyText
+  unique_num: 1
+  name_of_assoc_subkeddit: MyString
+  submitted_by: MyString

@@ -22,6 +22,12 @@ Rails.application.routes.draw do
   post 'users/delete_post_helper'
   post 'users/submit_post_helper'
   post 'users/save_changes_to_comment_helper'
+
+  # get 'forum/new'
+  # post 'forum/new_helper'
+
+
+
   
   # get 'zoomy', to: 'users#toy2'
 
@@ -31,6 +37,12 @@ Rails.application.routes.draw do
 
   #resources 'users'
   resources 'users', only: [:new,:create]
+
+  get 'forums/new'
+  post 'forums/new_helper'
+  get 'forums/display_forum'
+
+  resources 'forums', only: [:create]
   #resources :account_activations, only: [:edit] #example only
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,24 @@
+<h1>Forums#new</h1>
+<p>Find me in app/views/forums/new.html.erb</p>
+
+    <%= form_for(@forum) do |f| %>
+
+      <%= f.label :url %>
+      <br>
+      <%= f.text_field :url %>
+      <br><br>
+      <%= f.label :title %>
+      <br>
+      <%= f.text_field :title %>
+      <br><br>
+      <%= f.label :description %>
+      <br>
+      <%= f.text_area :description, :rows => 4 , :columns => 50 %>
+<!-- need to use ajax to look up all of the different subkeddit names, and compare said array/list to  -->
+      <br><br>
+      <%= f.label :subkeddit_name %>
+      <br>
+      <%= f.text_field :name_of_assoc_subkeddit%>
+      <br><br>
+      <%= f.submit "submit post"%>
+    <% end %>
