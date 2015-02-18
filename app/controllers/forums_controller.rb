@@ -37,16 +37,64 @@ class ForumsController < ApplicationController
 		#id can serve as unique num??		
 		@forum.save()
 
-
-		#redirect_to display_forum(@forum)
 		# p "@forum.title is: #{@forum.title }"
 		# return @forum
 	end
 
+	def index
+		# @forums = SubKeddit.find(params[:id]).forum.all
+		@forums = SubKeddit.find(1).forum.all #for that subKeddit, all the forums/posts
+	end
 
-	def display_forum(zoom)
-		@forum = zoom
-		return @forum
+	def show
+
+		p"------------------------------"
+
+		p "params[:sub_keddit_name] is: #{params[:sub_keddit_name]}"
+		p "params[:forum_title] is: #{params[:forum_title]}"
+
+		# @temp = SubKeddit.find_by(name: params[:sub_keddit_name]).forum.find_by(title: params[:forum_title])
+
+		@temp = SubKeddit.find_by(name: params[:sub_keddit_id]).forum.find_by(title: params[:id])
+
+		p "@temp is: #{@temp}" 
+
+		p"------------------------------"
+
+		#use 1 for params[:sub_keddit_id]
+		#use 3 for params[:id]
+
+		#for that forum in that subKeddit, all the posts
+
+		#working. At least does with the right parameters from view. 
+		# @posts = SubKeddit.find_by(name: params[:sub_keddit_name]).forum.find_by(title: params[:forum_title]).post.all 
+
+		@posts = SubKeddit.find_by(name: params[:sub_keddit_id]).forum.find_by(title: params[:id]).post.all 
+	end
+
+
+	def showy
+
+		p"------------------------------"
+
+		p "params[:sub_keddit_name] is: #{params[:sub_keddit_name]}"
+		p "params[:forum_title] is: #{params[:forum_title]}"
+
+		# @temp = SubKeddit.find_by(name: params[:sub_keddit_name]).forum.find_by(title: params[:forum_title])
+
+		@temp = SubKeddit.find_by(name: params[:sub_keddit_name]).forum.find_by(title: params[:forum_title])
+
+		p "@temp is: #{@temp}" 
+
+		p"------------------------------"
+
+		#use 1 for params[:sub_keddit_id]
+		#use 3 for params[:id]
+
+		#for that forum in that subKeddit, all the posts
+
+		#working. At least does with the right parameters from view. 
+		@posts = SubKeddit.find_by(name: params[:sub_keddit_name]).forum.find_by(title: params[:forum_title]).post.all 
 	end
 
 end

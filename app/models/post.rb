@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   
   belongs_to :user
+  belongs_to :forum
 
   # before_save :set_next_user_post_id
 

@@ -18,6 +18,18 @@
 <br>
 <br>
 <%= link_to "submit a link" , forums_new_url %>
+<br>
+
+<!-- this will take you to the list of avaiable subKeddits to view. will spit out an array of those subkeddits
+before we get to the proper page.
+
+-from here we should go to list_of_subKeddits.html.erb which will show us the list of subKeddits
+
+-buttons on list_of_subKeddits.html.erb should be a button to that forum, which will be a list of forums -->
+<br>
+<%= link_to "see list of avaiable subKeddits!", :controller => :sub_keddits, :action => :list_of_subKeddits %>
+<!--<%= link_to "see list of avaiable subKeddits!", :controller => :sub_keddits, :action => :list_of_subKeddits %>-->
+<!--<%= link_to "see list of avaiable subKeddits!", sub_keddits_path, :method => 'list_of_subKeddits' %>-->
 
 <% if session[:user_name] %>
 	<p id = "testing_page_id"><%= link_to "testing page" , users_testing_page_path %></p>

@@ -1,0 +1,16 @@
+
+
+<!-- this will spit out a list of subkeddits that we can view -->
+<% @subKeddits.each do |forum| %>
+
+	<!-- should take us to that subKeddit. In this case, that will be a list of forums 
+
+	take us to list_of_forums.html.erb which will render a list of forums
+
+	each button there will represent the forum itself.
+
+	passing the id1 so that I can know which subKeddit it is, so that I can get the list of forums.  
+	-->
+	<%= link_to subKeddit.name , :controller => :forums, :action => :list_of_forums(:id1 => subKeddit.id) %>
+	<br>
+<%end%>

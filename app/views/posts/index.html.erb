@@ -1,0 +1,17 @@
+
+
+<h1>Post#index</h1>
+<p>Find me in app/views/post/index.html.erb</p>
+
+<% @posts.each do |post| %>
+
+	<%= post.content%>
+	<br>
+	user name:
+	<%= post.user_name%>
+	<br>
+	submitted at:
+	<%= post.created_at%>
+	<br>
+<%end%>
+

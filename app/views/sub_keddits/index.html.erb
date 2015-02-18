@@ -1,0 +1,15 @@
+
+<br><br><br>
+<!-- each link needs to be a link to the list of threads IN that subreddit. So a list of forums (for that subreddit) 
+
+so forums.all for that particular thread. So forums.index
+-->
+<% @subKeddits.each do |subKeddit| %>
+
+	bonk
+	<%= link_to subKeddit.name , sub_keddit_path(subKeddit.name) %>
+
+	
+	<br>
+	<br>
+<%end%>

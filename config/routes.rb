@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   # delete 'logout'  => 'sessions#destroy'
 
   #resources 'users'
+
   resources 'users', only: [:new,:create]
 
   get 'forums/new'
@@ -43,6 +44,62 @@ Rails.application.routes.draw do
   get 'forums/display_forum'
 
   resources 'forums', only: [:create]
+
+resources :sub_keddits do
+  resources :forums
+end
+
+#get '/patients/:id', to: 'patients#show'
+#match ':controller/:action/:id(.:format)'
+#map.connect "schools/:id/check_teachers", :controller => "schools", :action => "check_teachers"
+#link_to "Check teachers", check_teachers_path(:id => @school.id)
+
+#subKeddit list
+#map.subKeddit_list "sub_keddits", :controller => "subKeddits", :action => "subKeddit_list"
+#this will take me to my list of subKeddits (WORKING)
+get '/sub_keddits', to: 'sub_keddits#list_of_subKeddits'
+#link_to "see list of avaiable subKeddits!", subKeddit_list_path
+#in subKeddit_list action, you create a variable called subKedits that holds an array, each of which 
+# is a subKeddit row/instance whatever. When iterating through, will use the link directly below 
+
+#this will take me to the list of threads IN that particular subKeddit
+#map.forum_list "sub_keddits/:id1/forums", :controller => "forums", :action => "list_of_forums"
+get 'sub_keddits/:id1/forums', to: 'forums#list_of_forums'
+
+#link_to forum.title, list_of_forums(:id1 => subKeddit.id)
+
+#the thread itself
+#map.show_thread "sub_keddits/:id1/forums/:id2", :controller => "posts", :action => "show_thread"
+get 'sub_keddits/:id1/forums/:id2', to: 'posts#show_thread'
+
+# gets working: http://localhost:3000/sub_keddits/technology/check_out_this_neat_new_phone
+get 'sub_keddits/:sub_keddit_name/:forum_title', to: 'forums#showy', as: 'blah'
+
+
+
+#GET '/new', to: 'articles#new', as: 'my_new_article'
+
+#no button needed for this
+#link_to subKeddit.title, list_of_forums(:id1 => params[id1], :id2 => forum.id)
+
+# get '/sub_keddits', to: 'subKeddits#list_of_subKeddits'
+# get 'sub_keddits/:id1/forums', to: 'forums#list_of_forums'
+# get 'sub_keddits/:id1/forums/:id2', to: 'posts#show_thread'
+
+#resources :sub_keddits
+
+resources :sub_keddits do
+  resources :forums
+end
+
+# resources :sub_keddits do
+#   resources :forums do
+#     resources :posts
+#   end
+# end
+
+
+
   #resources :account_activations, only: [:edit] #example only
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

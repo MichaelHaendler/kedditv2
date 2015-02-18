@@ -1,0 +1,23 @@
+
+<br><br><br>
+<!-- each link needs to be a link to the list of threads IN that subreddit. So a list of forums (for that subreddit) 
+
+so forums.all for that particular thread. So forums.index
+
+needs to link to....
+
+<h1>Forums#index</h1>
+<p>Find me in app/views/forums/index.html.erb</p>
+
+forums index
+-->
+<% @forums.each do |forum| %>
+
+	lalalal
+	<!--<%= link_to forum.title , sub_keddit_forum_path(sub_keddit_id: @sub_keddit_name, id: forum.title) %>-->
+
+	<%= link_to forum.title , blah_path(sub_keddit_name: @sub_keddit_name, forum_title: forum.title) %>
+	
+	<br>
+	<br>
+<%end%>

@@ -1,0 +1,9 @@
+<h1>Forums#list_of_forums</h1>
+<p>Find me in app/views/forums/list_of_forums.html.erb</p>
+
+<% @forums.each do |forum| %> 
+
+  <!-- this will give us a link to the forum itself, which will be a series of posts-->
+  <%= link_to forum.title,  :controller => :post, :action => :show_thread_path(:id1 => params[:id1], :id2 => forum.id)%>
+  <br>
+<%end%>
