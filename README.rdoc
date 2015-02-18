@@ -69,7 +69,17 @@ to a post. These are all of the basic features that a user needs to participate 
 All changes done, are, via ajax, done on both user side AND server side. Any changes are done dynamically/instantaniously,
 and so up immediately on the page that the user is performing the changes on. 
 
+Tuesday, February 17th, 10:45pm. 
 
+have implemented subreddits (aka subKeddits) so now I can have things like r/technology (though on my site it would 
+be sub_keddit/technology) forums in that subKeddit (aka sub_keddit/technology/check_out_this_cool_machine) and threads
+in that particular forum. example:
+
+"omg this looks so cool!"
+-jake123
+
+"looks soooo stupid!" 
+-tom45
 
 
 
