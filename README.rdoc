@@ -81,5 +81,21 @@ in that particular forum. example:
 "looks soooo stupid!" 
 -tom45
 
+Tuesday Feb 24 02:04:40 AM 2015
+
+got the delete button finally fixed and working. 
+
+errors with it right now: doesn't use  post_id_rel_to_user. Uses ID instead. 
+
+this error is in: 
+
+all_requirements_for_mod_of_post_met
+
+and 
+
+modifyPost
+
+also need to fix the password_digest so that's it's in use (use hartl book to see how to
+implement it manually). 
 
 

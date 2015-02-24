@@ -13,6 +13,7 @@ module UsersHelper
   def log_in(user)
     session[:id] = user.id
     session[:user_name] = user.user_name
+    session[:password_hash] = user.password_digest
   end
 
   def successfully_signed_in
@@ -21,6 +22,8 @@ module UsersHelper
     p "POW POW WOW WOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
   	
   	@user = User.find_by(user_name: params[:session][:user_name])
+
+    #debugger
 
   	if !@user.nil? && @user.password == params[:session][:password]
   		p "logging in user"

@@ -1,0 +1,209 @@
+<h1>Forums#showy</h1>
+<p>Find me in app/views/forums/showy.html.erb</p>
+
+<script src="app/assets/javascripts/forum_showy_display_posts.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_delete_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_edit_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_cancel_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_submit_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_save_changes_button_code.js"></script>
+
+
+<% if session[:user_name] %>
+	signed in as: <%= session[:user_name] %>
+<% else %>
+	<p>not signed in</p>
+<% end %>
+
+<br><br>
+title:" <%= @forum.title %> "
+<br><br><br>
+
+
+<!-- if this works, then use params to pass the sub_keddit_name and forum title to run (need to look up how exactly) -->
+<% if session[:user_name] %>
+	<textarea rows="6" cols="35" id = "show_forum_text_box"></textarea>
+	<br>
+
+	<input name="commit" type="submit" id="show_forum_post_button" value="submit post">
+	
+
+
+<% else %>
+	<p id = "user_greeting_not_signed_in"> sign in to post </p>
+<% end %>
+
+
+<p id = "commenters_posts"></p>
+
+
+<script>
+
+	//var sub_keddit_name = "<%= escape_javascript(params[:sub_keddit_name]) %>";	
+
+
+	// $(document).on("click", "#show_forum_post_button", function(){
+
+	//   	delete_this_comment("#show_forum_text_box",sub_keddit_name,forum_unique_num,forum_title);
+
+	// });
+
+
+$(document).ready(function(){
+
+	var sub_keddit_name = "<%= params[:sub_keddit_name] %>";	
+
+	var forum_unique_num = <%= params[:forum_unique_num] %>;
+
+	var forum_title = "<%= params[:forum_title] %>";
+
+	var sql_post_output = <%= @posts.to_json.html_safe %>;
+
+	//console.log(sql_post_output);
+
+	initial_display(sql_post_output);
+
+
+	$(document).on("click", "#show_forum_post_button", function(){
+
+		console.log("saw the click");
+
+	  	post_submission2("#show_forum_text_box",sub_keddit_name,forum_unique_num,forum_title);
+
+	});	
+
+//  function delete_this_comment(delButton,userName,subKedditName,forumUniqueNum,forumTitle){
+
+	$(document).on("click", ".delete_comment", function(){
+	  //console.log(this);
+	  var userName = "<%= session[:user_name] %>";
+
+	  console.log("see click for delete_comment");
+	  delete_this_comment(this,userName,sub_keddit_name,forum_unique_num,forum_title);
+	});
+
+
+
+	//console.log("getting in here at least");
+
+	// console.log("data is:");
+	// console.log(data.posts);
+
+	// console.log("1111 sub_keddit_name is: " + sub_keddit_name);
+	// console.log("1111 forum_title is: " + forum_title);
+
+	// var posts = JSON.parse(<%= escape_javascript(@postArray.to_json) %>);
+	//var posts = <%= raw @postArray %>;
+	// var blah = <%= raw escape_javascript(@posts.to_json) %>;
+
+	
+
+	// console.log("posts is:");
+
+	// console.log(posts);
+
+	//run(sub_keddit_name,forum_title);
+
+
+
+	// $(document).on("click", ".cancel_modifications_to_comment", function(){
+	//   console.log("seeing this click???");
+	//   go_back_to_previous_setup(this);
+	// });
+
+	// $("#submit_post_button").click(function(){
+	// 	var post = document.getElementById("testing_page_text_box");
+	// 	//console.log(post);
+	// 	post_submission(post.value);
+	// //run();
+	//  });
+
+
+});
+
+//--------------------------------------------------------------
+
+
+function initial_display(posts){
+
+
+	// for(var post of posts){
+	// //for(var post in posts){
+
+	console.log("post is: ");
+	////console.log(post);
+	// 	//console.log(post.id);
+
+	// 	//console.log("2post is: " + posts[1][0]);
+
+	// }
+
+	//if there are posts to be displayed
+  if(posts.length > 0){
+
+    for(var post of posts){
+      //console.log("does this bug you?");
+      //console.log(num);
+
+      var val = post.id;
+
+      //var test = data.posts[num];
+
+      //console.log(test);
+
+      //var val = data.posts[num].post_id_rel_to_user;//need to get working?
+
+      //console.log("val is: " + val);
+
+      var content = post.content;
+
+      //console.log("content is: " + content);
+
+      var comment = $("<div id = comment_container_"+val+" class = comment_container></div>");
+
+      comment.append("<p id = comment_"+val+" class = comment_p>" + content + "</p>");
+
+      //comment_ta means comment_textarea
+      comment.append("<textarea id = T"+val+" class = 'comment_ta' ></textarea>");
+
+      comment.children(".comment_ta").val(content);
+
+      comment.append("<button id = E"+val+" class = 'edit_comment' onclick=edit_comment(this);>edit</button>");
+
+      comment.append("<button id = D"+val+" class = 'delete_comment' onclick = delete_this_comment(this);>delete</button>");
+
+      comment.append("<button id = S"+val+" class = 'save_comment' onclick = save_changes_to_comment(this);>save</button>");
+
+      comment.append("<button id = C"+val+" class = 'dont_change_comment' onclick = cancel_changes_to_comment(this);>cancel</button>");
+
+      // console.log("child is: ");
+      // console.log(comment.children(".delete_comment"));
+
+      // console.log("parent is:");
+      // console.log(comment.children(".delete_comment").parent());
+
+      //$('textarea.comment_ta').val(content);
+
+      comment.children(".save_comment").hide();
+      comment.children(".dont_change_comment").hide();
+      comment.children(".comment_ta").hide();
+
+      $("#commenters_posts").append(comment);
+    }
+  }
+  else{
+      console.log("getting here");
+      $( "body" ).append("<p ><font color='red'>Sorry.There doesn't appear to be anything here.</font></p>");
+
+    }
+
+}
+
+
+</script>
+

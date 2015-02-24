@@ -27,9 +27,11 @@ before we get to the proper page.
 
 -buttons on list_of_subKeddits.html.erb should be a button to that forum, which will be a list of forums -->
 <br>
-<%= link_to "see list of avaiable subKeddits!", :controller => :sub_keddits, :action => :list_of_subKeddits %>
-<!--<%= link_to "see list of avaiable subKeddits!", :controller => :sub_keddits, :action => :list_of_subKeddits %>-->
-<!--<%= link_to "see list of avaiable subKeddits!", sub_keddits_path, :method => 'list_of_subKeddits' %>-->
+
+
+<%= link_to "see list of avaiable subKeddits!", sub_keddits_index_path %> 
+
+
 
 <% if session[:user_name] %>
 	<p id = "testing_page_id"><%= link_to "testing page" , users_testing_page_path %></p>

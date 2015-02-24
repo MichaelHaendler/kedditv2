@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216044005) do
+ActiveRecord::Schema.define(version: 20150221231900) do
 
   create_table "forums", force: true do |t|
     t.string   "title"
@@ -20,9 +20,11 @@ ActiveRecord::Schema.define(version: 20150216044005) do
     t.integer  "unique_num"
     t.string   "name_of_assoc_subkeddit"
     t.string   "submitted_by"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "sub_keddit_id"
+    t.string   "url_friendly_title"
+    t.integer  "num_of_posts",            default: 0
   end
 
   create_table "posts", force: true do |t|
@@ -37,6 +39,9 @@ ActiveRecord::Schema.define(version: 20150216044005) do
     t.integer  "downvote"
     t.integer  "forum_id"
     t.string   "user_name"
+    t.string   "sub_keddit_name"
+    t.string   "forum_title"
+    t.integer  "forum_unique_num"
   end
 
   add_index "posts", ["User_id"], name: "index_posts_on_User_id"
@@ -56,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150216044005) do
     t.datetime "updated_at",                            null: false
     t.string   "email"
     t.boolean  "admin",                 default: false
+    t.string   "password_digest"
   end
 
 end

@@ -24,6 +24,29 @@ class Post < ActiveRecord::Base
 
   end
 
+  def self.newPost_for_forum(subKeddit_name,forum_name,forum_unique_number,user_id,post)
+
+
+    @newPost = SubKeddit.find_by(name: subKeddit_name).Forum.find_by(title: forum_name, unique_num: forum_unique_number).Post.new
+    #-----------------------
+    #p "3this is only a test???????"
+
+    @user = User.find(user_id)
+
+    post_itself = self.new(User_id: @user.id, content: post)
+
+    #p "num was: #{(@user.post.maximum('post_id_rel_to_user') || 0)}"
+
+    @num = (@user.post.maximum('post_id_rel_to_user') || 0) + 1
+
+    #p "num now is: #{@num}"
+
+    post_itself.post_id_rel_to_user = @num;
+
+    post_itself.save
+
+  end
+
 
   # def newPost(id,post)
 

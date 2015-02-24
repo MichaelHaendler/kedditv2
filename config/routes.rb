@@ -45,9 +45,7 @@ Rails.application.routes.draw do
 
   resources 'forums', only: [:create]
 
-resources :sub_keddits do
-  resources :forums
-end
+
 
 #get '/patients/:id', to: 'patients#show'
 #match ':controller/:action/:id(.:format)'
@@ -57,7 +55,9 @@ end
 #subKeddit list
 #map.subKeddit_list "sub_keddits", :controller => "subKeddits", :action => "subKeddit_list"
 #this will take me to my list of subKeddits (WORKING)
-get '/sub_keddits', to: 'sub_keddits#list_of_subKeddits'
+
+#get '/sub_keddits', to: 'sub_keddits#list_of_subKeddits'
+
 #link_to "see list of avaiable subKeddits!", subKeddit_list_path
 #in subKeddit_list action, you create a variable called subKedits that holds an array, each of which 
 # is a subKeddit row/instance whatever. When iterating through, will use the link directly below 
@@ -70,12 +70,31 @@ get 'sub_keddits/:id1/forums', to: 'forums#list_of_forums'
 
 #the thread itself
 #map.show_thread "sub_keddits/:id1/forums/:id2", :controller => "posts", :action => "show_thread"
-get 'sub_keddits/:id1/forums/:id2', to: 'posts#show_thread'
+#get 'sub_keddits/:id1/forums/:id2', to: 'posts#show_thread'
 
 # gets working: http://localhost:3000/sub_keddits/technology/check_out_this_neat_new_phone
-get 'sub_keddits/:sub_keddit_name/:forum_title', to: 'forums#showy', as: 'blah'
+#get 'sub_keddits/:sub_keddit_name/:forum_title', to: 'forums#showy', as: 'blah'
 
 
+# http://localhost:3000/sub_keddits/sub_name/forums/forum_unique_num/forum_name
+
+
+
+get 'sub_keddits/', to: 'sub_keddits#index', as: 'sub_keddits_index'
+
+get 'sub_keddits/:sub_keddit_name', to: 'sub_keddits#showy', as: 'sub_keddit_show'
+
+get 'sub_keddits/:sub_keddit_name/forums/:forum_unique_num/:forum_title', to: 'forums#showForum', as: 'get_forum'
+
+#post 'sub_keddits/:sub_keddit_name/forums/:forum_unique_num/:forum_title', to: 'forums#submitNewPost'
+
+post '/forums/submit_post_for_this_forum', to: 'forums#submitNewPost'
+
+#for deleting a post from the forum, and for editing/updating a post form this forum. 
+post '/forums/modify_post_from_this_forum', to: 'forums#modifyPost'
+
+
+#post 'sub_keddits/:sub_keddit_name/forums/:forum_unique_num/:forum_title', to: 'forums#showForum', as: 'get_forum_helper'
 
 #GET '/new', to: 'articles#new', as: 'my_new_article'
 
@@ -88,9 +107,9 @@ get 'sub_keddits/:sub_keddit_name/:forum_title', to: 'forums#showy', as: 'blah'
 
 #resources :sub_keddits
 
-resources :sub_keddits do
-  resources :forums
-end
+# resources :sub_keddits do
+#   resources :forums
+# end
 
 # resources :sub_keddits do
 #   resources :forums do

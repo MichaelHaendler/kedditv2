@@ -55,6 +55,20 @@ class UsersController < ApplicationController
     Post.newPost(session[:id],post_text)
 	end
 
+  def newPost_for_forum(post_text)
+    #p "post_text is: #{post_text}"
+
+    # p "ZONKERS!!!!!!!!!!!!!!!!!!!!!!!222222222222222"
+    # # p self.post
+    # p "self.id is: #{id}"
+    # Post.blah(self)
+    #Post.zoom3()
+    #Post.new(User_id: session[:id], content: post_text).save
+    Post.newPost(session[:id],post_text)
+  end
+
+
+
 	def getPosts()
 		Post.where(User_id: session[:id])
 	end
@@ -92,6 +106,27 @@ class UsersController < ApplicationController
       format.html
 
       format.json { render :json => { :status => 'Ok', :message => 'Received', posts: @posts, post_was_succesfully_submitted: @results},
+                    :status => 200
+                  }
+    end
+
+
+  end
+
+  def submit_post_helper_for_this_forum
+
+
+    #create new post
+    @results = self.newPost(params[:content])
+
+    @posts = self.getPosts()
+
+    #p "@results is: #{@results}"
+
+    respond_to do |format|
+      format.html
+
+      format.json { render :json => { :status => 'Ok', :message => 'Received', posts: @posts},
                     :status => 200
                   }
     end

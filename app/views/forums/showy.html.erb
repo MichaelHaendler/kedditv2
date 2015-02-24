@@ -1,19 +1,121 @@
-<h1>Forums#index</h1>
-<p>Find me in app/views/forums/index.html.erb</p>
+<h1>Forums#showy</h1>
+<p>Find me in app/views/forums/showy.html.erb</p>
 
-title:" "
+<script src="app/assets/javascripts/forum_showy_run_code.js"></script>
 
-<% @posts.each do |post| %>
+<script src="app/assets/javascripts/forum_showy_delete_button_code.js"></script>
 
-	<br>
-	-------------------
-	<br>
-	" <%= post.content %> "
-	<br>
-	User: <%= post.user_name %>
-	<br>
-	Posted at: <%= post.created_at %>
+<script src="app/assets/javascripts/forum_showy_edit_button_code.js"></script>
 
-<%end%>
+<script src="app/assets/javascripts/forum_showy_cancel_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_submit_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_save_changes_button_code.js"></script>
+
+
+<% if session[:user_name] %>
+	signed in as: <%= session[:user_name] %>
+<% else %>
+	<p>not signed in</p>
+<% end %>
+
+<br><br>
+title:" <%= @forum.title %> "
+<br><br><br>
+
+
+<!-- if this works, then use params to pass the sub_keddit_name and forum title to run (need to look up how exactly) -->
+<% if session[:user_name] %>
+	<textarea rows="6" cols="35" id = "testing_page_text_box">
+	</textarea>
+	<br>
+	<input name="commit" 
+	type="submit" 
+	value="submit post" 
+	id="submit_post_button" 
+	onclick="post_submission('#testing_page_text_box')"/>
+<% else %>
+	<p id = "user_greeting_not_signed_in"> sign in to post </p>
+<% end %>
+
+
+
+<!--
+
+sub_keddit_name is:  <%= params[:sub_keddit_name] %>
+<br>
+forum_title is: <%= params[:forum_title] %>
+<br>
+
+
+
+<% if @number_of_posts > 0 %>
+
+	<% @posts.each do |post| %>
+
+		<br>
+		-------------------
+		<br>
+		" <%= post.content %> "
+		<br>
+		User: <%= post.user_name %>
+		<br>
+		Posted at: <%= post.created_at %>
+
+	<%end%>
+
+<% else %>
 	
+	<p> there appears to be nothing in this thread. Be the first to post! <p>
+
+<% end %>
+-->
+
+<p id = "commenters_posts"></p>
+
+
+<script>
+
+	var sub_keddit_name = "<%= escape_javascript(params[:sub_keddit_name]) %>";	
+
+	var forum_title = "<%= escape_javascript(params[:forum_title]) %>";
+
+$(document).ready(function(){
+
+	//console.log("getting in here at least");
+
+
+
+	// console.log("1111 sub_keddit_name is: " + sub_keddit_name);
+	// console.log("1111 forum_title is: " + forum_title);
+
+	run2(sub_keddit_name,forum_title);
+
+	// $(document).on("click", ".delete_comment", function(){
+	//   //console.log(this);
+	//   console.log("going in here for some unknown reason???");
+	//   delete_this_comment(this);
+	// });
+
+	// $(document).on("click", ".cancel_modifications_to_comment", function(){
+	//   console.log("seeing this click???");
+	//   go_back_to_previous_setup(this);
+	// });
+
+	// $("#submit_post_button").click(function(){
+	// 	var post = document.getElementById("testing_page_text_box");
+	// 	//console.log(post);
+	// 	post_submission(post.value);
+	// //run();
+	//  });
+
+
+});
+
+//--------------------------------------------------------------
+
+
+
+</script>
 

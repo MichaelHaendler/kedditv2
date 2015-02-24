@@ -47,3 +47,7 @@ end
 gem 'arel', '6.0.0.beta2'
 
 gem 'faker', '1.4.3'
+
+#gem 'byebug',      '3.4.0'
+gem 'better_errors'
+gem 'bcrypt', '3.1.7'

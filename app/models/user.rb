@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 	has_many :post, dependent: :destroy
+
+	#has_secure_password
+	
 	#validates_uniqueness_of :user_name, :case_sensitive => false
 
 	#a work around until I am able to get it to work proper, and do stuff like
@@ -32,6 +35,8 @@ class User < ActiveRecord::Base
 		#self.post.save
 		# p "boom chacka laka"
 	end
+
+
 
 # user = User.find(3)
 # user.getPosts()

@@ -3,12 +3,17 @@
 <!-- each link needs to be a link to the list of threads IN that subreddit. So a list of forums (for that subreddit) 
 
 so forums.all for that particular thread. So forums.index
+
+from index (of all the subKeddits) to show (of that particular subKeddit)
 -->
+
+The following sub_keddits exist for your viewing pleasure:
+
+<br><br>
+
 <% @subKeddits.each do |subKeddit| %>
 
-	bonk
-	<%= link_to subKeddit.name , sub_keddit_path(subKeddit.name) %>
-
+		<%= link_to subKeddit.name , sub_keddit_show_path(sub_keddit_name: subKeddit.name) %> 
 	
 	<br>
 	<br>
