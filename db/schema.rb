@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221231900) do
+ActiveRecord::Schema.define(version: 20150303060635) do
 
   create_table "forums", force: true do |t|
     t.string   "title"
@@ -27,11 +27,18 @@ ActiveRecord::Schema.define(version: 20150221231900) do
     t.integer  "num_of_posts",            default: 0
   end
 
+  create_table "post_arrays", force: true do |t|
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.text     "posts",      default: "--- []\n"
+    t.integer  "forum_id"
+  end
+
   create_table "posts", force: true do |t|
     t.text     "content"
     t.integer  "User_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "post_id_rel_to_user",           default: 0
     t.string   "inReplyTo_user_name"
     t.integer  "inReplyTo_post_id_rel_to_user"
@@ -42,6 +49,8 @@ ActiveRecord::Schema.define(version: 20150221231900) do
     t.string   "sub_keddit_name"
     t.string   "forum_title"
     t.integer  "forum_unique_num"
+    t.string   "loc_of_comment",                default: ""
+    t.string   "loc_of_comment_in_forum",       default: ""
   end
 
   add_index "posts", ["User_id"], name: "index_posts_on_User_id"

@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
+	include BCrypt
 	has_many :post, dependent: :destroy
+	#before_save :set_password_digest #wrong b/c it would go off EVERY time there was a save. 
+  	before_create :set_password_digest
 
 	#has_secure_password
 	
@@ -7,6 +10,13 @@ class User < ActiveRecord::Base
 
 	#a work around until I am able to get it to work proper, and do stuff like
 	#user.post.build(content: "this is a new post")
+
+#http://ruby-doc.org//gems/docs/b/bcrypt-ruby-maglev--3.0.1/BCrypt/Password.html#method-c-new
+
+	def set_password_digest()
+		self.password_digest = Password.create(self.password)
+	end
+
 	def newPost(post_text)
 		# p "ZONKERS!!!!!!!!!!!!!!!!!!!!!!!222222222222222"
 		# # p self.post

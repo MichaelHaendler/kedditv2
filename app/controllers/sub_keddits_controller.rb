@@ -1,8 +1,25 @@
 class SubKedditsController < ApplicationController
 
+	def new
+		@create_sub_keddit = SubKeddit.new
+	end
+
+	def create
+
+		#p "params[:sub_keddit][:name] is: #{params[:sub_keddit][:name]}"
+
+		SubKeddit.create(name: params[:sub_keddit][:name])
+		#also have a thing where a message pops up on the front page saying "subkeddit created"
+		redirect_to root_path
+	end
 
 	def index
 		@subKeddits = SubKeddit.all
+
+		@subKeddits.each do |sk|
+			p "sk.name is: #{sk.name}"
+		end
+
 	end
 
 

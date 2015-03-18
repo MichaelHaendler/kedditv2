@@ -78,7 +78,7 @@ get 'sub_keddits/:id1/forums', to: 'forums#list_of_forums'
 
 # http://localhost:3000/sub_keddits/sub_name/forums/forum_unique_num/forum_name
 
-
+#http://localhost:3000/sub_keddits/technology/forums/8/awesome_new_computer
 
 get 'sub_keddits/', to: 'sub_keddits#index', as: 'sub_keddits_index'
 
@@ -92,6 +92,20 @@ post '/forums/submit_post_for_this_forum', to: 'forums#submitNewPost'
 
 #for deleting a post from the forum, and for editing/updating a post form this forum. 
 post '/forums/modify_post_from_this_forum', to: 'forums#modifyPost'
+
+post 'forums/save_changes_to_comment', to: 'forums#save_changes_to_comment'
+
+post '/forums/replyToPost', to: 'forums#replyToPost'#suppose I could have used patch or something instead?
+
+get '/create_a_sub_keddit', to: 'sub_keddits#new', as: 'new_sub_keddit'
+
+#post 'create_a_sub_keddit', to: 'sub_keddits#create', as: 'create_sub_keddit'
+
+
+post '/official_creation_of_sub_keddit', to: 'sub_keddits#create', as: 'create_sub_keddit'
+
+post '/new_submission', to: 'forums#create', as: 'create_forum'#this is to create a new forum
+
 
 
 #post 'sub_keddits/:sub_keddit_name/forums/:forum_unique_num/:forum_title', to: 'forums#showForum', as: 'get_forum_helper'

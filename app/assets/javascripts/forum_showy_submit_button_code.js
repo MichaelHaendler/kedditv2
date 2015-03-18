@@ -61,7 +61,8 @@ function post_submission2(textarea_id,sub_keddit_name, forum_unique_num, forum_t
         //display_all_posts(data);
 
         //just show the new post. 
-        add_new_post_to_forum(submission,data.post_id);
+        // add_new_post_to_forum(submission,data.post_id_rel_to_user);
+         add_new_post_to_forum(data);
         
       }
 

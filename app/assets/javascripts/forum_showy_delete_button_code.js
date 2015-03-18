@@ -22,7 +22,7 @@
 
   //console.log("$(delButton).id is: " + $(delButton).id);
 
-  var postID = get_post_id_from_delete_id(id_string);
+  var post_id_rel_to_user = getNum(id_string);
 
   var toDo = "delete";
       
@@ -37,7 +37,7 @@
                   forum_title: forumTitle, 
                   forum_unique_num: forumUniqueNum, 
                   to_do: toDo,
-                  post_id: postID
+                  post_id_rel_to_user: post_id_rel_to_user
                 }; 
 
   console.log("params is: ");
@@ -90,7 +90,7 @@
 }
 
 
-function get_post_id_from_delete_id(id_string){
+function getNum(id_string){
 
   console.log("id_string is: " + id_string);
 

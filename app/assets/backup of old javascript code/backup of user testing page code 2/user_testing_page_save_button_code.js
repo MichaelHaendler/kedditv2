@@ -1,7 +1,7 @@
 
 
 
-
+//NOTE! this save is in regards to editing. NOT replying. 
 //save
 //needs to pass in the post_id_rel_to_user value and the post itself to ajax, overwriting original post. 
 //then needs to refresh page with updated post. 
@@ -10,11 +10,11 @@
 
 //create index where you search by user name and post number
 
-function save_changes_to_comment(saveButton){
+function save_changes_to_comment2(saveButton){
 
 	var commentBlock = $(saveButton).parent();
 
-	console.log("commentBlock.id is: ");
+	console.log("33333commentBlock.id is: ");
 	console.log(commentBlock[0].id);
 
 	var comment_p = commentBlock.children(".comment_p").text();//gets something like 'hello1'
@@ -51,7 +51,7 @@ function save_changes_to_comment(saveButton){
 
 	      	console.log("getting into success after delete_this_comment");
 
-	      	revert(commentBlock);
+	      	make_same(commentBlock);
 
 	        //display_posts(data);
 
@@ -72,12 +72,19 @@ function save_changes_to_comment(saveButton){
 
 }
 
-function revert(commentBlock){
+
+//the initial modifications are done in to the comment in the comment_ta element. 
+//make_same sets comment_p (the element that shows the comment in paragraph form) 
+//to be holding the same thing. So that things stay equal. 
+function make_same(commentBlock){
 
 	  console.log("getting into revert?");
 
+
+    //get the ".comment_ta" (textarea...where you wrote the first post) element
 	  var comment_ta = commentBlock.children(".comment_ta");
 
+    //set the ".comment_p" element's text value to the value of the ".comment_ta" element
 	  commentBlock.children(".comment_p").text(comment_ta.val());
 
       commentBlock.children(".save_comment").hide();

@@ -1,47 +1,57 @@
 class UsersController < ApplicationController
 
   include SessionsHelper
+  include BCrypt
+
+  #before_save :set_password_digest
+  #before_create :set_password_digest
+
+
+  # def set_password_digest()
+  #   p "getting into set_password_digest in UsersController!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+  #   self.password_digest = Password.create(self.password)
+  # end
 
 #User.find_by(id: 3).getPosts()[0].content
 
   #take comment, look up user, look up post, and change the post. 
-  def save_changes_to_comment_helper
+  # def save_changes_to_comment_helper
 
-    p "getting into save_changes_to_comment_helper"
+  #   p "getting into save_changes_to_comment_helper"
 
-    p "params[:new_post] is: #{params[:new_post]}"
+  #   p "params[:new_post] is: #{params[:new_post]}"
 
-    p "params[:post_id_num] is: #{params[:post_id_num]}"
+  #   p "params[:post_id_num] is: #{params[:post_id_num]}"
 
-    p "session[:id] is: #{session[:id]}"
+  #   p "session[:id] is: #{session[:id]}"
 
-    #@temp = User.find(session[:id]).getPosts()
+  #   #@temp = User.find(session[:id]).getPosts()
 
-    #debugger
+  #   #debugger
 
-    p "User.find(session[:id]).getPosts() is: #{User.find(session[:id]).getPosts().inspect}"
+  #   p "User.find(session[:id]).getPosts() is: #{User.find(session[:id]).getPosts().inspect}"
 
-    #get post that we're looking for
-    @post = User.find(session[:id]).getPosts().find_by(post_id_rel_to_user: params[:post_id_num])
+  #   #get post that we're looking for
+  #   @post = User.find(session[:id]).getPosts().find_by(post_id_rel_to_user: params[:post_id_num])
 
-    p "@post is: #{@post.inspect}"
+  #   p "@post is: #{@post.inspect}"
 
-    #debugger
+  #   #debugger
 
-    #update content
-    @post.content = params[:new_post]
+  #   #update content
+  #   @post.content = params[:new_post]
 
-    #save changes to it. 
-    @post.save
+  #   #save changes to it. 
+  #   @post.save
 
-    respond_to do |format|
-      format.html
+  #   respond_to do |format|
+  #     format.html
 
-      format.json { render :json => { :status => 'Ok', :message => 'Received'},:status => 200}
+  #     format.json { render :json => { :status => 'Ok', :message => 'Received'},:status => 200}
                   
-    end
+  #   end
 
-  end
+  # end
 
 	def newPost(post_text)
 		#p "post_text is: #{post_text}"

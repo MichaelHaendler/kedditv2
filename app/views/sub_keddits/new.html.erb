@@ -1,0 +1,12 @@
+<h1>SubKeddit#new</h1>
+<p>Find me in app/views/sub_keddits/new.html.erb</p>
+
+    <%= form_for @create_sub_keddit, url: create_sub_keddit_path do |f| %>
+    	<br>
+      <div> subKeddit name: <div>
+      <%= f.text_field :name %>
+      <br>
+      <br>
+      <%= f.submit "Create sub keddit" %>
+    <% end %>
+

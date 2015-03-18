@@ -1,7 +1,7 @@
 <h1>Forums#showy</h1>
 <p>Find me in app/views/forums/showy.html.erb</p>
 
-<script src="app/assets/javascripts/forum_showy_display_posts.js"></script>
+<script src="app/assets/javascripts/forum_showy_display_posts2.js"></script>
 
 <script src="app/assets/javascripts/forum_showy_delete_button_code.js"></script>
 
@@ -12,6 +12,10 @@
 <script src="app/assets/javascripts/forum_showy_submit_button_code.js"></script>
 
 <script src="app/assets/javascripts/forum_showy_save_changes_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_reply_button_code.js"></script>
+
+<script src="app/assets/javascripts/forum_showy_reply_save_button_code.js"></script>
 
 
 <% if session[:user_name] %>
@@ -56,11 +60,7 @@ title:" <%= @forum.title %> "
 
 $(document).ready(function(){
 
-	var sub_keddit_name = "<%= params[:sub_keddit_name] %>";	
-
-	var forum_unique_num = <%= params[:forum_unique_num] %>;
-
-	var forum_title = "<%= params[:forum_title] %>";
+	
 
 	var sql_post_output = <%= @posts.to_json.html_safe %>;
 
@@ -73,6 +73,12 @@ $(document).ready(function(){
 
 		console.log("saw the click");
 
+		var sub_keddit_name = "<%= params[:sub_keddit_name] %>";	
+
+		var forum_unique_num = <%= params[:forum_unique_num] %>;
+
+		var forum_title = "<%= params[:forum_title] %>";
+
 	  	post_submission2("#show_forum_text_box",sub_keddit_name,forum_unique_num,forum_title);
 
 	});	
@@ -81,47 +87,68 @@ $(document).ready(function(){
 
 	$(document).on("click", ".delete_comment", function(){
 	  //console.log(this);
-	  var userName = "<%= session[:user_name] %>";
 
-	  console.log("see click for delete_comment");
-	  delete_this_comment(this,userName,sub_keddit_name,forum_unique_num,forum_title);
+	  	var userName = "<%= session[:user_name] %>";
+
+		var sub_keddit_name = "<%= params[:sub_keddit_name] %>";	
+
+		var forum_unique_num = <%= params[:forum_unique_num] %>;
+
+		var forum_title = "<%= params[:forum_title] %>";
+
+	    console.log("see click for delete_comment");
+
+	    delete_this_comment(this,userName,sub_keddit_name,forum_unique_num,forum_title);
 	});
 
 
+// otherUsers_user_name
+// otherUsers_post_id_rel_to_user (get from comment)
+// user_name
+// sub_keddit_name
+// forum_unique_num
+// forum_title
+// submission (the post itself)
 
-	//console.log("getting in here at least");
+	//clicked the save-reply button for reply
+	$(document).on("click", "#S_reply", function(){
 
-	// console.log("data is:");
-	// console.log(data.posts);
+	  	console.log("33see click for reply_to_comment");
 
-	// console.log("1111 sub_keddit_name is: " + sub_keddit_name);
-	// console.log("1111 forum_title is: " + forum_title);
+	  	var userName = "<%= session[:user_name] %>";
 
-	// var posts = JSON.parse(<%= escape_javascript(@postArray.to_json) %>);
-	//var posts = <%= raw @postArray %>;
-	// var blah = <%= raw escape_javascript(@posts.to_json) %>;
+		var sub_keddit_name = "<%= params[:sub_keddit_name] %>";	
 
-	
+		var forum_unique_num = <%= params[:forum_unique_num] %>;
 
-	// console.log("posts is:");
+		var forum_title = "<%= params[:forum_title] %>";
 
-	// console.log(posts);
+	//reply_save_comment(this ,userName, subKedditName, forumUniqueNum, forumTitle);
 
-	//run(sub_keddit_name,forum_title);
+		console.log("this is: ");
+		console.log(this);
+
+	  reply_save_comment(this,userName,sub_keddit_name,forum_unique_num,forum_title);
+
+	});
 
 
+	$(document).on("click", ".reply_to_comment", function(){
 
-	// $(document).on("click", ".cancel_modifications_to_comment", function(){
-	//   console.log("seeing this click???");
-	//   go_back_to_previous_setup(this);
-	// });
+		var userName = "<%= session[:user_name] %>";
 
-	// $("#submit_post_button").click(function(){
-	// 	var post = document.getElementById("testing_page_text_box");
-	// 	//console.log(post);
-	// 	post_submission(post.value);
-	// //run();
-	//  });
+	  console.log("see click for reply_to_comment");
+	  console.log(this);
+
+		var sub_keddit_name = "<%= params[:sub_keddit_name] %>";	
+
+		var forum_unique_num = <%= params[:forum_unique_num] %>;//number. So not a string. 
+
+		var forum_title = "<%= params[:forum_title] %>";
+
+		//gets whole comment and user name. takes us to forum_showy_reply_button_code.js
+	    reply_to_this_comment(this,userName);
+	});
 
 
 });
@@ -131,69 +158,13 @@ $(document).ready(function(){
 
 function initial_display(posts){
 
+	console.log("getting into initial_display------ ");
 
-	// for(var post of posts){
-	// //for(var post in posts){
-
-	console.log("post is: ");
-	////console.log(post);
-	// 	//console.log(post.id);
-
-	// 	//console.log("2post is: " + posts[1][0]);
-
-	// }
-
-	//if there are posts to be displayed
   if(posts.length > 0){
 
     for(var post of posts){
-      //console.log("does this bug you?");
-      //console.log(num);
 
-      var val = post.id;
-
-      //var test = data.posts[num];
-
-      //console.log(test);
-
-      //var val = data.posts[num].post_id_rel_to_user;//need to get working?
-
-      //console.log("val is: " + val);
-
-      var content = post.content;
-
-      //console.log("content is: " + content);
-
-      var comment = $("<div id = comment_container_"+val+" class = comment_container></div>");
-
-      comment.append("<p id = comment_"+val+" class = comment_p>" + content + "</p>");
-
-      //comment_ta means comment_textarea
-      comment.append("<textarea id = T"+val+" class = 'comment_ta' ></textarea>");
-
-      comment.children(".comment_ta").val(content);
-
-      comment.append("<button id = E"+val+" class = 'edit_comment' onclick=edit_comment(this);>edit</button>");
-
-      comment.append("<button id = D"+val+" class = 'delete_comment' onclick = delete_this_comment(this);>delete</button>");
-
-      comment.append("<button id = S"+val+" class = 'save_comment' onclick = save_changes_to_comment(this);>save</button>");
-
-      comment.append("<button id = C"+val+" class = 'dont_change_comment' onclick = cancel_changes_to_comment(this);>cancel</button>");
-
-      // console.log("child is: ");
-      // console.log(comment.children(".delete_comment"));
-
-      // console.log("parent is:");
-      // console.log(comment.children(".delete_comment").parent());
-
-      //$('textarea.comment_ta').val(content);
-
-      comment.children(".save_comment").hide();
-      comment.children(".dont_change_comment").hide();
-      comment.children(".comment_ta").hide();
-
-      $("#commenters_posts").append(comment);
+    	post_body(post);
     }
   }
   else{
@@ -203,6 +174,28 @@ function initial_display(posts){
     }
 
 }
+
+// function getNumber_from_div(htmlEl){
+
+//   var string = htmlEl.id;
+
+//   var start = "comment_container_".length;//# of chars in 'comment_container_'
+
+//   var end = string.length;
+
+//   var num = parseInt(string.slice(start,end));
+
+//   console.log("(getNumber_from_div) returning number " + num);
+
+//   return num;
+// }
+
+
+//does the same as above (only shorter). untested
+// function getID(string_seg,string){
+
+//   return parseInt(string.slice(string_seg.length,string.length));
+// }
 
 
 </script>
