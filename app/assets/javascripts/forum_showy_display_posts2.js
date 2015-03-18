@@ -167,7 +167,7 @@ function comment_object_body_helper_post(post){
   comment.append("<button id = D"+val+" class = 'delete_comment' onclick = delete_this_comment(this);>delete</button>");
 
   //save changes to the comment
-  comment.append("<button id = S"+val+" class = 'save_comment' onclick = save_changes_to_comment(this);>save</button>");
+  comment.append("<button id = S"+val+" class = 'save_edit' onclick = save_changes_to_comment(this);>save</button>");
 
   //cancel changes to the comment
   comment.append("<button id = C"+val+" class = 'dont_change_comment' onclick = cancel_changes_to_comment(this);>cancel</button>");

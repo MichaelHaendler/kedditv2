@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   
   belongs_to :user
   belongs_to :forum
-  before_save :increment_post_id_rel_to_user_val, :set_forum_id_num
+  before_create :increment_post_id_rel_to_user_val, :set_forum_id_num
 
   # before_save :set_next_user_post_id
 
@@ -56,6 +56,8 @@ class Post < ActiveRecord::Base
 
 
   def increment_post_id_rel_to_user_val()
+
+    #debugger
 
     p "getting into increment_post_id_rel_to_user_val-------"
 

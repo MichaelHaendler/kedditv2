@@ -76,11 +76,14 @@ class ForumsController < ApplicationController
 
     #debugger
 
-    #update content
-    @post.content = params[:new_post]
+    #(hopefully) update content and save changes to it. 
+    @post.update(content: params[:new_post])
 
-    #save changes to it. 
-    @post.save
+    # #update content
+    # @post.content = params[:new_post]
+
+    # #save changes to it. 
+    # @post.save
 
     respond_to do |format|
       format.html

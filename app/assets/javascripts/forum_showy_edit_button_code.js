@@ -25,8 +25,8 @@ function edit_comment(editButton){
 
 
   //show save and cancel buttons, and show text area. 
-
-  commentBlock.children(".save_comment").show();
+  //.save_comment
+  commentBlock.children(".save_edit").show();
 
   commentBlock.children(".dont_change_comment").show();
 

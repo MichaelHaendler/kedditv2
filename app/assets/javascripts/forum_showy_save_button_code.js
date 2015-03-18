@@ -2,6 +2,7 @@
 
 function save_changes_to_comment(saveButton){
 
+	console.log("1111 getting into this particular save_changes_to_comment instance");
 
 	var commentBlock = $(saveButton).parent();
 

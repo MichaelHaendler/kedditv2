@@ -12,6 +12,8 @@
 
 function save_changes_to_comment2(saveButton){
 
+  console.log("222 getting into save_changes_to_comment2222");
+
 	var commentBlock = $(saveButton).parent();
 
 	console.log("33333commentBlock.id is: ");
